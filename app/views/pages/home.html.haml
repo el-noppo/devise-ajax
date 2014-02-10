@@ -1,0 +1,36 @@
+- content_for(:title, 'This is our home page view')
+%nav.navbar.navbar-default{role: "navigation"}
+  .container
+    .navbar-header
+      %button.navbar-toggle{"data-target" => "#nav-collapse", "data-toggle" => "collapse", type: "button"}
+        %span.sr-only Toggle navigation
+        %span.icon-bar
+        %span.icon-bar
+        %span.icon-bar
+      %a.navbar-brand{href: root_path}
+        %span Devise_ajax
+    #nav-collapse.collapse.navbar-collapse
+      %ul.nav.navbar-nav
+        %li.dropdown
+          %a.dropdown-toggle{"data-toggle" => "dropdown", href: "#"}
+            Menu
+            %b.caret
+          %ul.dropdown-menu
+            - if current_user
+              %li
+                = link_to "Sign out", destroy_user_session_path, "data-method" => :delete
+            - else
+              %li
+                = link_to "Sign up", remote_sign_up_path, :remote => true
+              %li
+                = link_to "Sign in", new_user_session_path
+.container
+  .row
+    .col-xs-12
+      - if current_user
+        %h1
+          Welcome to the home view
+          = current_user.email
+      - else
+        %h1 Hello stranger, please sign in to interact on a deeper level
+

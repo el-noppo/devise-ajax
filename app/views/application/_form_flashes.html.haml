@@ -1,0 +1,5 @@
+#form_flashes
+  - flash.each do |type, message|
+    .alert.alert-dismissable{ :class => twitterized_type(type) }
+      %button.close{"data-dismiss" => "alert", "aria-hidden" => "true"} ×
+      %p= message
